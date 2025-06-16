@@ -9,7 +9,11 @@ public class Solution {
         println(new WaterBridge());
         println(new SuspensionBridge());
     }
+    public static void println(Bridge bridge){
+        System.out.println(bridge.getCarsCount());
+    }
 
-    //add println method here
+
+
 }
 
