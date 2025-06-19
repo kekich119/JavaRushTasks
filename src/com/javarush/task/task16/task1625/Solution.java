@@ -13,6 +13,7 @@ public class Solution {
         t2.start();
         t1.interrupt();
         t2.interrupt();
+
     }
 
     public static class T1 extends Thread {
@@ -38,5 +39,10 @@ public class Solution {
             }
         }
     }
+
+
+
+
+
 }
 
