@@ -1,9 +1,9 @@
 package com.javarush.task.task16.task1630;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /* 
 Последовательный вывод файлов
@@ -13,7 +13,11 @@ public class Solution {
     public static String firstFileName;
     public static String secondFileName;
 
-    //напишите тут ваш код
+    static {
+        Scanner in = new Scanner(System.in);
+        firstFileName = in.nextLine();
+        secondFileName = in.nextLine();
+    }
 
     public static void main(String[] args) throws InterruptedException {
         systemOutPrintln(firstFileName);
@@ -24,6 +28,7 @@ public class Solution {
         ReadFileInterface f = new ReadFileThread();
         f.setFileName(fileName);
         f.start();
+        f.join();
         System.out.println(f.getFileContent());
     }
 
@@ -38,5 +43,36 @@ public class Solution {
         void start();
     }
 
-    //напишите тут ваш код
+    public static class ReadFileThread extends Thread implements ReadFileInterface {
+        String nameFile;
+        String result = "";
+
+
+        public void setFileName(String fullFileName) {
+            this.nameFile = fullFileName;
+        }
+
+        @Override
+        public String getFileContent() {
+
+
+            return result ;
+        }
+
+        @Override
+        public void run() {
+            try (BufferedReader reader = new BufferedReader(new FileReader(nameFile))) {
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result += line + " ";
+                }
+
+
+            } catch (IOException e) {
+                System.out.println("Файл ненайден");
+            }
+
+        }
+    }
 }
