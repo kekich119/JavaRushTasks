@@ -20,27 +20,29 @@ public class Solution {
 
         @Override
         public void run() {
-            Iron iron = takeIron();
-            Clothes clothes = takeClothes();
-            iron(iron, clothes);
-            returnIron();
+            synchronized (Iron.class) {
+                Iron iron = takeIron();
+                Clothes clothes = takeClothes();
+                iron(iron, clothes);
+                returnIron();
+            }
         }
 
-        protected Iron takeIron() {
+        synchronized protected Iron takeIron() {
             System.out.println("Taking the iron");
             return new Iron();
         }
 
-        protected Iron returnIron() {
+        protected synchronized Iron returnIron() {
             System.out.println("Returning the iron");
             return new Iron();
         }
 
-        protected Clothes takeClothes() {
+        protected synchronized Clothes takeClothes() {
             return new Clothes("T-shirt");
         }
 
-        protected void iron(Iron iron, Clothes clothes) {
+        protected synchronized void iron(Iron iron, Clothes clothes) {
             System.out.println(getName() + " is ironing a " + clothes.name);
         }
     }
@@ -48,7 +50,7 @@ public class Solution {
     public static class Iron {
     } //Утюг
 
-    public static class Clothes {//Одежда
+    public  static class Clothes {//Одежда
         String name;
 
         public Clothes(String name) {
