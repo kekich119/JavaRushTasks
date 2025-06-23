@@ -11,10 +11,24 @@ public class Solution {
         Counter counter3 = new Counter();
         Counter counter4 = new Counter();
 
+        counter1.join();
         counter1.start();
+        counter2.join();
         counter2.start();
+        counter3.join();
         counter3.start();
+        counter4.join();
         counter4.start();
+
+
+
+
+
+
+
+
+
+
 
         for (int i = 1; i <= 100; i++) {
             if (values[i] != 1) {
@@ -45,7 +59,7 @@ public class Solution {
         @Override
         public void run() {
             do {
-                synchronized (this) {
+                synchronized (Solution.class) {
                     incrementCount();
                     values[getCount()]++;
                 }
