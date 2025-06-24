@@ -4,6 +4,9 @@ package com.javarush.task.task17.task1722;
 Посчитаем
 */
 
+
+import java.util.Scanner;
+
 public class Solution {
     public static void main(String[] args) throws InterruptedException {
         Counter counter1 = new Counter();
@@ -19,6 +22,9 @@ public class Solution {
         counter3.start();
         counter4.join();
         counter4.start();
+
+
+
 
 
 
